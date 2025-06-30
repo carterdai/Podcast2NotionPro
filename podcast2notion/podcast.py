@@ -386,6 +386,11 @@ def get_profile():
         return resp.json().get("data").get("uid")
 
 def getTongYiUrl(dir_dict,dir_name,title,url):
+    if not isinstance(dir_dict, dict):
+        raise TypeError("dir_dict 必须是字典类型")
+    if not dir_name or not title or not url:
+        print(f"警告: 缺少必要参数 - dir_name: {dir_name}, title: {title}, url: {url}")
+        return ""
     dir_id = dir_dict.get(dir_name)
     if dir_id is None:
         dir_id = create_dir(dir_name)
